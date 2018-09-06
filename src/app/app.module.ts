@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AppAngularMaterialModule } from './app-angular-material/app-angular-material.module';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { AppAngularMaterialModule } from './app-angular-material/app-angular-mat
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    AppAngularMaterialModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
