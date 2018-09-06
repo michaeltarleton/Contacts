@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 
+import { ContactService, IContact } from '../shared';
+
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -9,15 +13,17 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 export class ContactListComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'phoneNumber', 'email'];
-  dataSource: MatTableDataSource<IContacts>;
+  dataSource: MatTableDataSource<IContact>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<IContacts>(CONTACTS);
-    this.dataSource.paginator = this.paginator;
+    this.contactService.getContacts().subscribe((contacts) => {
+      this.dataSource = new MatTableDataSource<IContact>(contacts);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -25,55 +31,3 @@ export class ContactListComponent implements OnInit {
   }
 
 }
-
-interface IContacts {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-}
-
-const CONTACTS: IContacts[] = [
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  }
-];
