@@ -4,11 +4,17 @@ import {
   MatButtonModule,
   MatToolbarModule,
   MatIconModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTab,
+  MatCardModule
 } from '@angular/material';
 
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {PlatformModule} from '@angular/cdk/platform';
 import {ObserversModule} from '@angular/cdk/observers';
+import {MatInputModule} from '@angular/material';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   exports: [
@@ -17,7 +23,12 @@ import {ObserversModule} from '@angular/cdk/observers';
     MatIconModule,
     MatMenuModule,
     PlatformModule,
-    ObserversModule
+    ObserversModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatPaginatorModule
   ]
 })
 
