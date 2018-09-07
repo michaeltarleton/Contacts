@@ -5,7 +5,7 @@ const Path = require('path');
 
 const server = Hapi.server({
     port: process.env.PORT || 3000,
-    host: 'localhost'
+    host: '0.0.0.0'
 });
 
 const init = async () => {
@@ -18,7 +18,7 @@ const init = async () => {
       handler: function (request, reply) {
           return {
               env: process.env.ENV || 'development',
-              contactServiceUrl: process.env.CONTACT_SERVICE_URL || 'http://localhost:8081',
+              contactServiceUrl: process.env.CONTACT_SERVICE_URL || 'http://localhost:5000',
           };
       }
     });
