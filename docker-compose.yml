@@ -1,0 +1,23 @@
+version: '3'
+services:
+  contact-ui:
+    build: .
+    image: contact-ui
+    ports:
+      - 4200:4200
+    depends_on:
+      - contact-service
+    environment:
+      - CONTACT_SERVICE_URL=http://localhost:5000
+    networks:
+      - backend
+  contact-service:
+    build: https://github.com/michaeltarleton/Contact-Service.git
+    image: contact-service
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+
+networks:
+  backend:
