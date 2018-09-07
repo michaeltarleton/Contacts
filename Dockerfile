@@ -1,30 +1,23 @@
 # Create image based on the official Node 6 image from dockerhub
-FROM node:10.7.0 AS build
-
-# Expose the port the app runs in
-ENV PORT 80
-EXPOSE 80
-
-# install angular cli
-RUN npm install -g @angular/cli
-
-# copy packages.json files
-RUN mkdir -p /build
+FROM node:10.9.0-alpine AS build-ui
+RUN npm i -g @angular/cli yarn
+RUN mkdir /build
 WORKDIR /build
+COPY angular.json package*.json ts*.json yarn.lock ./
+COPY src src
+RUN yarn && ng build --prod
 
-# install the app packages
-WORKDIR /usr/app
-COPY package.json /usr/src/app
-# RUN npm rebuild node-sass --force
-RUN npm install
+FROM node:10.9.0-alpine AS build-server
+RUN npm i -g yarn && mkdir /build
+WORKDIR /build
+COPY server ./
+RUN yarn
 
-# copy the app files
-COPY . /usr/src/app
-
-# publish the angular app
-WORKDIR /usr/src/app
-RUN ng serve --prod
-
-# Serve the app
-WORKDIR /usr/src/app/server
-CMD ["npm", "start"]
+FROM node:10.9.0-alpine
+EXPOSE 80
+ENV NODE_ENV production
+RUN mkdir /app
+WORKDIR /app
+COPY --from=build-server /build ./
+COPY --from=build-ui /build ./public
+ENTRYPOINT [ "node", "server.js" ]
