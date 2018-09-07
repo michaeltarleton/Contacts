@@ -7,6 +7,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 1. Install Docker Compose
 2. Run: `docker-compose up --build`
 
+This will kick off three builds: ui, server, final image.
+
+At the end of the build you will have a running instance of an Angular 6+ UI that connects to a .NET Core WebApi 2.1 service.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
