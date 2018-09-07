@@ -6,6 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 1. Install Docker Compose
 2. Run: `docker-compose up --build`
+3. Visit [http://localhost:5000](http://localhost:5000)
 
 This will kick off three builds: ui, server, final image.
 
