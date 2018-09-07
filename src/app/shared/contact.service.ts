@@ -1,63 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ContactService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getContacts(): Observable<IContact[]> {
-    return of(CONTACTS);
+    return this.http.get<IContact[]>('https://localhost:5001/contacts');
   }
 }
 
 export interface IContact {
+  id: number;
   firstName: string;
   lastName: string;
   phoneNumber: string;
   email: string;
 }
-
-const CONTACTS: IContact[] = [
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  },
-  {
-    firstName: 'Sam',
-    lastName: 'Dalton',
-    phoneNumber: '555-555-1234',
-    email: 'sam.dalton@msn.com'
-  }
-];

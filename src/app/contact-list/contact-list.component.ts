@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 
 export class ContactListComponent implements OnInit {
-  displayedColumns: string[] = ['firstName', 'lastName', 'phoneNumber', 'email'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'phoneNumber', 'email'];
   dataSource: MatTableDataSource<IContact>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
