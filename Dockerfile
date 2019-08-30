@@ -1,5 +1,6 @@
 # Build the angular ui
 FROM node:10.9.0-alpine AS build-ui
+RUN npm config set unsafe-perm true
 RUN npm i -g @angular/cli@6.1.0 yarn
 RUN mkdir /build
 WORKDIR /build
