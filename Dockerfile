@@ -1,7 +1,7 @@
 # Build the angular ui
-FROM node:10.9.0-alpine AS build-ui
+FROM node:alpine AS build-ui
 RUN npm config set unsafe-perm true
-RUN npm i -g @angular/cli@6.1.0 yarn
+RUN npm i -g @angular/cli yarn
 RUN mkdir /build
 WORKDIR /build
 COPY angular.json package*.json ts*.json yarn.lock ./
@@ -9,14 +9,14 @@ COPY src src
 RUN yarn && ng build --prod
 
 # Build the server
-FROM node:10.9.0-alpine AS build-server
+FROM node:alpine AS build-server
 RUN npm i -g yarn && mkdir /build
 WORKDIR /build
 COPY server ./
 RUN yarn
 
 # Build the final image
-FROM node:10.9.0-alpine
+FROM node:alpine
 EXPOSE 4200
 ENV NODE_ENV production
 ENV PORT 4200
